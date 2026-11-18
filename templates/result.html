@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SupportPilot - Ticket Result</title>
+</head>
+<body>
+
+    <h1>SupportPilot AI - Ticket Analysis</h1>
+
+    <h2>AI Analysis</h2>
+
+    <p><b>Ticket Category:</b> {{ category }}</p>
+    <p><b>Ticket Type:</b> {{ ticket_type }}</p>
+    <p><b>Priority:</b> {{ priority }}</p>
+    <p><b>Severity:</b> {{ severity }}</p>
+
+    <h2>Suggested Resolution</h2>
+
+    <pre>{{ response }}</pre>
+
+    <hr>
+
+    <h2>Did this solution resolve your issue?</h2>
+
+    <form action="/feedback" method="POST">
+        <input type="hidden" name="ticket_id" value="{{ ticket_id }}">
+        <input type="hidden" name="response" value="yes">
+        <button type="submit">Yes, Resolved</button>
+
+    </form>
+
+    <form action="/feedback" method="POST">
+        <input type="hidden" name="ticket_id" value="{{ ticket_id }}">
+        <input type="hidden" name="response" value="no">
+        <button type="submit">No, Escalate</button>
+
+    </form>
+
+</body>
+</html>

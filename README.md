@@ -1,71 +1,205 @@
-# Infosys-_AI-Powered-Customer-Support-Platform-with-Ticket-Resolution-Agent
 
-# AI-Based Ticket Resolution System
+# SupportPilot – AI-Powered IT Support Ticket Resolution Agent
 
-## Project Overview
-The AI-Based Ticket Resolution System is designed to automate the process of handling customer support tickets using Artificial Intelligence and Natural Language Processing (NLP).
+## 1. Project Overview
 
-The system analyzes incoming support tickets, identifies their categories and priorities, and helps provide relevant solutions. This reduces manual effort and improves ticket resolution efficiency.
+SupportPilot is an AI-powered IT support ticket management system that automates ticket classification, priority prediction, severity assessment, knowledge retrieval, and resolution generation.
 
-## Objectives
-- Automatically classify support tickets.
-- Identify the category and priority of tickets.
-- Analyze ticket descriptions using NLP.
-- Suggest relevant solutions for user queries.
-- Reduce manual ticket handling time.
+It helps employees receive faster troubleshooting suggestions while allowing unresolved or uncertain tickets to be escalated to human IT support.
 
-## Dataset
+## 2. Objectives
+
+- Automate IT support ticket classification.
+- Predict ticket type and priority using Machine Learning.
+- Assess ticket severity.
+- Retrieve relevant solutions from a knowledge base.
+- Generate structured support responses.
+- Validate resolutions through employee feedback.
+- Escalate unresolved tickets to human support.
+- Store and monitor tickets through an admin dashboard.
+
+## 3. System Architecture
+
+Employee submits ticket
+        |
+        v
+    Ticket Intake
+        |
+        v
+  AI Ticket Classification
+        |
+        v
+ Priority and Severity Assessment
+        |
+        v
+  Knowledge Retrieval
+        |
+        v
+ Resolution Generation
+        |
+        v
+ Employee Feedback
+       / \
+      /   \
+    Yes    No
+     |      |
+     v      v
+ Resolved  Escalated
+     \      /
+      \    /
+       v  v
+   SQLite Database
+        |
+        v
+   Admin Dashboard
+
+## 4. Key Features
+
+- Ticket submission through a web interface.
+- ML-based category, type, and priority prediction.
+- Rule-based severity assessment.
+- TF-IDF-based knowledge retrieval.
+- Template-based resolution response generation.
+- Employee feedback and ticket status updates.
+- Human review flag for low-confidence category predictions.
+- SQLite ticket storage.
+- Admin dashboard displaying all tickets.
+
+## 5. Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| Python | Backend programming |
+| Pandas | Data preprocessing |
+| Scikit-learn | Machine Learning |
+| TF-IDF | Text feature extraction and retrieval |
+| Logistic Regression | Ticket classification |
+| Flask | Web application |
+| SQLite | Database |
+| HTML | Frontend |
+
+## 6. Dataset
+
 Dataset: Customer IT Support – Multilingual Ticket Dataset
 
-Source: Kaggle
+Source: https://www.kaggle.com/datasets/tobiasbueck/multilingual-customer-support-tickets
 
-Link: https://www.kaggle.com/datasets/tobiasbueck/multilingual-customer-support-tickets
+- Original records: 28,587
+- English records retained: 16,335
+- Features used: Ticket text, queue, type, priority, and answer.
+- Missing subject values were handled during preprocessing.
+- Records without answers were removed.
 
-The dataset contains customer support tickets, descriptions, responses, categories, priorities, and other relevant information.
+## 7. Machine Learning Models
 
-## Technologies Used
-- Python
-- Pandas
-- NumPy
-- Natural Language Processing (NLP)
-- Machine Learning
-- Git and GitHub
+Three Logistic Regression models were trained:
 
-## Project Structure
+1. Ticket Category Prediction
+2. Ticket Type Prediction
+3. Ticket Priority Prediction
 
-AI-Based-Ticket-Resolution-System/
+### Baseline Evaluation Results
 
-    data/
-        raw/
-        processed/
+| Model | Accuracy |
+|---|---:|
+| Category Classification | 49.92% |
+| Ticket Type Prediction | 84.48% |
+| Priority Prediction | 60.09% |
 
-    notebooks/
-    
-    src/
+Low-confidence category predictions are flagged for human decision.
 
-    preprocess.py
-    requirements.txt
-    README.md
+Severity assessment currently uses rule-based logic because the dataset does not contain severity labels.
 
-## Data Preprocessing
-The dataset undergoes the following preprocessing steps:
+## 8. Project Structure
 
-1. Loading the Kaggle dataset.
-2. Filtering English-language tickets.
-3. Handling missing values.
-4. Removing duplicate records.
-5. Converting text into lowercase.
-6. Removing HTML tags and URLs.
-7. Combining ticket subjects and descriptions.
-8. Saving the cleaned dataset.
+```text
+SupportPilot/
+│
+├── data/
+│   ├── raw/
+│   └── processed/
+│
+├── models/
+│   ├── queue_model.pkl
+│   ├── type_model.pkl
+│   └── priority_model.pkl
+│
+├── notebooks/
+│
+├── src/
+│   ├── app.py
+│   ├── preprocess.py
+│   ├── train_model.py
+│   ├── predict.py
+│   ├── severity.py
+│   ├── knowledge_retrieval.py
+│   ├── resolution_generator.py
+│   ├── resolution_validation.py
+│   └── database.py
+│
+├── templates/
+│   ├── index.html
+│   ├── result.html
+│   ├── status.html
+│   └── dashboard.html
+│
+├── static/
+├── requirements.txt
+├── .gitignore
+└── README.md
+```
 
-## Expected Outcome
-The system aims to classify incoming support tickets and provide relevant resolution suggestions, making the ticket management process faster and more efficient.
+## 9. Installation and Execution
 
-## Team / Internship
-Infosys Springboard Virtual Internship
+### Step 1: Clone the repository
 
-## Dataset Attribution
-Customer IT Support – Multilingual Ticket Dataset by Tobias Bueck.
+```bash
+git clone https://github.com/Rampilla-Deepthi/nfosys-_AI-Powered-Customer-Support-Platform-with-Ticket-Resolution-Agent.git
+```
 
-Licensed under Creative Commons Attribution 4.0 (CC BY 4.0).
+### Step 2: Open the project folder
+
+```bash
+cd nfosys-_AI-Powered-Customer-Support-Platform-with-Ticket-Resolution-Agent
+```
+
+### Step 3: Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Step 4: Run the application
+
+```bash
+python src/app.py
+```
+
+### Step 5: Open in browser
+
+http://127.0.0.1:5000
+
+## 10. Application Workflow
+
+1. Employee submits an IT support ticket.
+2. The ML models predict ticket category, type, and priority.
+3. The severity module assesses ticket severity.
+4. The knowledge retrieval module searches for a relevant solution.
+5. A structured support response is generated.
+6. Employee confirms whether the solution worked.
+7. The ticket is marked Resolved or Escalated.
+8. Ticket information is stored in SQLite.
+9. The admin dashboard displays submitted tickets and their statuses.
+
+## 11. Future Enhancements
+
+- Improve ticket classification accuracy.
+- Integrate a generative AI model for dynamic resolution generation.
+- Add authentication for employees and administrators.
+- Improve dashboard analytics and visualizations.
+- Add email notifications for escalated tickets.
+- Introduce a larger IT-specific knowledge base.
+
+## 12. Project Status
+
+Core ticket processing, ML predictions, Flask integration, resolution feedback, SQLite storage, and the admin dashboard have been implemented.

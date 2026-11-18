@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SupportPilot Admin Dashboard</title>
+</head>
+<body>
+
+    <h1>SupportPilot AI - Admin Dashboard</h1>
+
+    <h2>All Support Tickets</h2>
+
+    <p>Total Tickets: {{ tickets|length }}</p>
+
+    <table border="1" cellpadding="10">
+
+        <tr>
+            <th>ID</th>
+            <th>Subject</th>
+            <th>Category</th>
+            <th>Type</th>
+            <th>Priority</th>
+            <th>Severity</th>
+            <th>Status</th>
+        </tr>
+
+        {% for ticket in tickets %}
+        <tr>
+            <td>{{ ticket[0] }}</td>
+            <td>{{ ticket[1] }}</td>
+            <td>{{ ticket[3] }}</td>
+            <td>{{ ticket[4] }}</td>
+            <td>{{ ticket[5] }}</td>
+            <td>{{ ticket[6] }}</td>
+            <td>{{ ticket[8] }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    <br>
+
+    <a href="/">Submit New Ticket</a>
+
+</body>
+</html>
